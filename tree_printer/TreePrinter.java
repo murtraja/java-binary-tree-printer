@@ -19,20 +19,23 @@ class Node {
 		System.out.println(prettyPrint(this, 1, height));
 	}
 	private StringBuilder prettyPrint(Node root, int currentHeight, int totalHeight) {
-		//		if(currentHeight>totalHeight || root == null) return;
-		if(currentHeight==totalHeight) return new StringBuilder(root.data+"");
-		int spaces = getSpaceCount(totalHeight-currentHeight + 1);
-		int slashes = getSlashCount(totalHeight-currentHeight +1);
 		StringBuilder sb = new StringBuilder();
-//		for(int i=0; i<spaces; i++) sb.append(" ");
-//		sb.append(root.data+"");
+		int spaces = getSpaceCount(totalHeight-currentHeight + 1);
+		if(root == null) {
+			//create a 'spatial' block and return it
+			String row = String.format("%"+(2*spaces+1)+"s%n", "");
+			//now repeat this row space+1 times
+			String block = new String(new char[spaces+1]).replace("\0", row);
+			return new StringBuilder(block);
+		}
+		if(currentHeight==totalHeight) return new StringBuilder(root.data+"");
+		int slashes = getSlashCount(totalHeight-currentHeight +1);
 		sb.append(String.format("%"+(spaces+1)+"s%"+spaces+"s", root.data+"", ""));
-//		for(int i=0; i<spaces; i++) sb.append(" ");
 		sb.append("\n");
 		//now print / and \
 		// but make sure that left and right exists
-		char leftSlash = '/';
-		char rightSlash = '\\';
+		char leftSlash = root.left == null? ' ':'/';
+		char rightSlash = root.right==null? ' ':'\\';
 		int spaceInBetween = 1;
 		for(int i=0, space = spaces-1; i<slashes; i++, space --, spaceInBetween+=2) {
 			for(int j=0; j<space; j++) sb.append(" ");
@@ -142,13 +145,41 @@ public class TreePrinter {
 
 /*
 
+11
+2 3
+4 -1
+5 -1
+6 -1
+7 8
+-1 9
+-1 -1
+10 11
+-1 -1
+-1 -1
+-1 -1
+
+2
+2 -1
+-1 -1
+
 3
 2 3
 -1 -1
 -1 -1
 
-3
-12 23
+4
+32 -1
+3 4
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+
+4
+2 -1
+3 4
+-1 -1
+-1 -1
 -1 -1
 -1 -1
 
