@@ -24,9 +24,10 @@ class Node {
 		int spaces = getSpaceCount(totalHeight-currentHeight + 1);
 		int slashes = getSlashCount(totalHeight-currentHeight +1);
 		StringBuilder sb = new StringBuilder();
-		for(int i=0; i<spaces; i++) sb.append(" ");
-		sb.append(root.data+"");
-		for(int i=0; i<spaces; i++) sb.append(" ");
+//		for(int i=0; i<spaces; i++) sb.append(" ");
+//		sb.append(root.data+"");
+		sb.append(String.format("%"+(spaces+1)+"s%"+spaces+"s", root.data+"", ""));
+//		for(int i=0; i<spaces; i++) sb.append(" ");
 		sb.append("\n");
 		//now print / and \
 		// but make sure that left and right exists
@@ -49,16 +50,18 @@ class Node {
 		// now line by line print the trees side by side
 		Scanner leftScanner = new Scanner(leftTree.toString());
 		Scanner rightScanner = new Scanner(rightTree.toString());
-		//spaceInBetween-=1;
+//		spaceInBetween+=1;
 		while(leftScanner.hasNextLine()) {
-			sb.append(leftScanner.nextLine());
 			if(currentHeight==totalHeight-1) {
-				for(int j=0; j<spaceInBetween; j++) sb.append(" ");
+				sb.append(String.format("%-2s %2s", leftScanner.nextLine(), rightScanner.nextLine()));
+				sb.append("\n");
 				spaceInBetween-=2;				
 			}
-			else 
+			else {
+				sb.append(leftScanner.nextLine());
 				sb.append(" ");
-			sb.append(rightScanner.nextLine()+"\n");
+				sb.append(rightScanner.nextLine()+"\n");
+			}
 		}
 
 		return sb;
@@ -139,6 +142,80 @@ public class TreePrinter {
 
 /*
 
+3
+2 3
+-1 -1
+-1 -1
+
+3
+12 23
+-1 -1
+-1 -1
+
+7
+12 13
+4 5
+6 7
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+
+7
+12 13
+14 15
+16 17
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+
+15
+2 3
+4 5
+6 7
+8 9
+0 1
+2 3
+4 5
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+
+15
+12 13
+24 25
+26 27
+38 39
+30 31
+32 33
+34 35
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+
 31
 2 3
 4 5
@@ -155,6 +232,47 @@ public class TreePrinter {
 6 7
 8 9
 0 1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+-1 -1
+
+31
+2 3
+4 5
+6 7
+8 9
+10 11
+12 13
+14 15
+16 17
+18 19
+20 21
+22 23
+24 25
+26 27
+28 29
+30 31
 -1 -1
 -1 -1
 -1 -1
